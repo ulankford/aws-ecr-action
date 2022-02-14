@@ -126,6 +126,7 @@ function run_pre_build_script() {
 
 function docker_build() {
   echo "== START DOCKERIZE"
+  echo "== Ultan fork"
   local TAG=$1
   local docker_tag_args=""
   local DOCKER_TAGS=$(echo "$TAG" | tr "," "\n")
@@ -140,7 +141,10 @@ function docker_build() {
 
     INPUT_EXTRA_BUILD_ARGS="$INPUT_EXTRA_BUILD_ARGS --cache-from=$INPUT_CACHE_FROM"
   fi
-
+  echo $INPUT_EXTRA_BUILD_ARGS
+  echo $INPUT_DOCKERFILE
+  echo $docker_tag_args
+  echo $INPUT_PATH
   docker build $INPUT_EXTRA_BUILD_ARGS -f $INPUT_DOCKERFILE $docker_tag_args $INPUT_PATH
   echo "== FINISHED DOCKERIZE"
 }
